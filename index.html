@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PSUC Unit I: Reverse Engineering Portal ⚙️</title>
+    <title>PSUC Unit I: Master Reverse Engineering Portal ⚙️</title>
     <style>
         :root {
             --bg-color: #0f172a;
@@ -11,6 +11,7 @@
             --accent-cyan: #38bdf8;
             --accent-green: #4ade80;
             --accent-orange: #fb923c;
+            --accent-purple: #c084fc;
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
             --border-color: #334155;
@@ -73,8 +74,8 @@
 
         .section-title {
             color: var(--accent-orange);
-            font-size: 1.2rem;
-            margin: 25px 0 15px 0;
+            font-size: 1.1rem;
+            margin: 30px 0 15px 0;
             text-transform: uppercase;
             letter-spacing: 1px;
             border-bottom: 1px solid var(--border-color);
@@ -125,13 +126,13 @@
         }
 
         .card.open .card-body {
-            max-height: 1000px;
+            max-height: 1200px;
             padding: 20px;
             border-top-color: var(--border-color);
         }
 
         .block {
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             padding: 12px 15px;
             border-radius: 6px;
             font-size: 0.95rem;
@@ -144,17 +145,16 @@
             color: #e0f2fe;
         }
 
+        .metaphor {
+            background: rgba(192, 132, 252, 0.1);
+            border-left: 4px solid var(--accent-purple);
+            color: #f3e8ff;
+        }
+
         .syllabus-concept {
             background: rgba(74, 222, 128, 0.1);
             border-left: 4px solid var(--accent-green);
             color: #dcfce7;
-        }
-
-        .discussion {
-            background: rgba(251, 146, 60, 0.1);
-            border-left: 4px solid var(--accent-orange);
-            color: #ffedd5;
-            font-style: italic;
         }
 
         .ascii-graphic {
@@ -185,14 +185,14 @@
 
 <div class="container">
     <header>
-        <h1>PSUC Unit I: Reverse Engineering Portal ⚙️</h1>
-        <p class="subtitle">Don't memorize definitions—see how modern computer architecture actually works!</p>
+        <h1>PSUC Unit I: Master Reverse Engineering Portal ⚙️</h1>
+        <p class="subtitle">Complete Unit I Syllabus • Real-World Scenarios • Physical Metaphors</p>
     </header>
 
-    <input type="text" id="searchInput" class="search-box" placeholder="🔍 Type to search topics (e.g., RAM, CPU, Compiler, Cache)..." onkeyup="filterTopics()">
+    <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search topics (e.g., RAM, ROM, Compiler, Float, Registers, Bus)..." onkeyup="filterTopics()">
 
     <!-- SECTION 1 -->
-    <div class="section-title">1. Hardware Systems & Memory Hierarchy</div>
+    <div class="section-title">1. Digital Computer Systems & Hardware</div>
 
     <div class="card">
         <div class="card-header" onclick="toggleCard(this)">
@@ -201,127 +201,236 @@
         </div>
         <div class="card-body">
             <div class="ascii-graphic">
-  [ 50 Chrome Tabs ] ──▶ ( CPU: 100% Load ) ──▶ ♨️ HEAT!
-                             │
-                             ▼
-                    [ 💨 Fans at 5000 RPM ]
+  [ 50 Tabs Open ] ──▶ ( CPU: 100% Load ) ──▶ ♨️ HEAT!
+                           │
+                           ▼
+                  [ 💨 Fans at 5000 RPM ]
             </div>
             <div class="block aha-moment">
-                <strong>💡 Real-World "Aha!" Moment:</strong> Ever wonder why your laptop fans turn into a jet engine when you open 50 Chrome tabs? Chrome opens dozens of separate processes, forcing the CPU to frantically context-switch and run millions of micro-calculations per second. High load = high heat!
+                <strong>💡 Real-World "Aha!" Moment:</strong> Laptop fans turn loud when you open 50 tabs because the CPU is context-switching continuously to run micro-calculations for active scripts.
+            </div>
+            <div class="block metaphor">
+                <strong>🎨 Physical Metaphor:</strong> The Master Chef working at hyper-speed—more orders mean more heat generated in the kitchen!
             </div>
             <div class="block syllabus-concept">
-                <strong>🧠 Syllabus Concept (CPU):</strong> The Central Processing Unit fetches, decodes, and executes instructions. High activity increases clock cycle frequency and thermal power consumption.
-            </div>
-            <div class="block discussion">
-                <strong>💬 Quick Check:</strong> "If the CPU is getting hot, is it because it's fetching data from the SSD or processing instructions inside its registers?"
+                <strong>🧠 Syllabus Concept (CPU):</strong> Executes fetch-decode-execute instruction cycles via the ALU and Control Unit.
             </div>
         </div>
     </div>
 
     <div class="card">
         <div class="card-header" onclick="toggleCard(this)">
-            <span>🔋 2. RAM vs. SSD (Why Unsaved Work Vanishes) <span class="tag">Memory</span></span>
+            <span>🔋 2. Primary RAM vs. Secondary Storage <span class="tag">Memory</span></span>
             <span class="icon">▼</span>
         </div>
         <div class="card-body">
             <div class="ascii-graphic">
-  POWER ON  : [ RAM: Working Space ] ──SAVE──▶ [ SSD: Permanent ]
-  POWER OFF : [ RAM: Wiped Clean!  ]           [ SSD: Safe & Intact ]
+  POWER ON  : [ RAM: Working Counter ] ──SAVE──▶ [ SSD: Permanent ]
+  POWER OFF : [ RAM: Wiped Clean!    ]           [ SSD: Safe & Intact ]
             </div>
             <div class="block aha-moment">
-                <strong>💡 Real-World "Aha!" Moment:</strong> Why did your unsaved document vanish when your laptop battery died? You were typing inside RAM (volatile working space). It only stays permanent once transferred down to the SSD or Hard Drive (non-volatile cold storage).
+                <strong>💡 Real-World "Aha!" Moment:</strong> Unsaved work vanishes on power loss because RAM requires electrical current to maintain bits (volatile), while SSD storage is permanent (non-volatile).
+            </div>
+            <div class="block metaphor">
+                <strong>🎨 Physical Metaphor:</strong> RAM is the Kitchen Counter top; SSD is the Cold Storage Locker in the basement.
             </div>
             <div class="block syllabus-concept">
-                <strong>🧠 Syllabus Concept (Primary vs. Secondary):</strong> RAM is fast and volatile (loses state on power loss). Secondary storage (SSD/HDD) is non-volatile and permanent, but slower to access.
-            </div>
-            <div class="block discussion">
-                <strong>💬 Quick Check:</strong> "When you launch a video game, where does the data load from, and where does it go while playing?"
+                <strong>🧠 Syllabus Concept:</strong> RAM is high-speed volatile memory; SSD/HDD is persistent non-volatile secondary storage.
             </div>
         </div>
     </div>
 
     <div class="card">
         <div class="card-header" onclick="toggleCard(this)">
-            <span>⚡ 3. Cache & Memory Latency <span class="tag">Memory Hierarchy</span></span>
+            <span>🗿 3. ROM & Bootstrapping (BIOS) <span class="tag">Firmware</span></span>
             <span class="icon">▼</span>
         </div>
         <div class="card-body">
             <div class="ascii-graphic">
-  [ CPU Core ] ⚡ Instant ⚡ [ CACHE ] ──🚶 Walk ──▶ [ RAM ]
+  POWER ON ──▶ [ Read ROM / BIOS ] ──▶ [ Check Hardware ] ──▶ [ Load OS from SSD ]
             </div>
             <div class="block aha-moment">
-                <strong>💡 Real-World "Aha!" Moment:</strong> Why does a 200MB game load slowly the first time, but instantly when you reopen it 10 seconds later? The CPU cached the most frequently used graphics data right next to itself on the chip so it doesn't have to walk back to RAM!
+                <strong>💡 Real-World "Aha!" Moment:</strong> How does your laptop know how to light up the display before Windows/Linux loads? The basic power-on self-test code is permanently etched onto the ROM chip.
+            </div>
+            <div class="block metaphor">
+                <strong>🎨 Physical Metaphor:</strong> An engraved marble wall in the building lobby—unchangeable and permanently visible.
             </div>
             <div class="block syllabus-concept">
-                <strong>🧠 Syllabus Concept (Cache):</strong> Cache is small, high-speed SRAM located on the CPU die. It buffers frequently accessed RAM instructions to drastically reduce CPU wait times.
+                <strong>🧠 Syllabus Concept (ROM):</strong> Non-volatile memory containing permanent boot instructions (firmware/BIOS).
             </div>
-            <div class="block discussion">
-                <strong>💬 Quick Check:</strong> "Why can't computers just use 32GB of Cache memory instead of buying RAM?"
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <span>⚡ 4. Cache & Memory Latency <span class="tag">Memory Hierarchy</span></span>
+            <span class="icon">▼</span>
+        </div>
+        <div class="card-body">
+            <div class="ascii-graphic">
+  [ CPU Core ] ⚡ Fast ⚡ [ CACHE SRAM ] ──🚶 Slow ──▶ [ RAM DRAM ]
+            </div>
+            <div class="block aha-moment">
+                <strong>💡 Real-World "Aha!" Moment:</strong> Reopening a game loads instantly because frequently accessed textures were buffered into high-speed CPU cache SRAM.
+            </div>
+            <div class="block metaphor">
+                <strong>🎨 Physical Metaphor:</strong> The Chef's prep spice rack right above the stove vs. walking to the pantry.
+            </div>
+            <div class="block syllabus-concept">
+                <strong>🧠 Syllabus Concept:</strong> High-speed SRAM located on/near CPU die to bridge the speed gap between CPU and RAM.
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <span>🤏 5. CPU Registers <span class="tag">Architecture</span></span>
+            <span class="icon">▼</span>
+        </div>
+        <div class="card-body">
+            <div class="ascii-graphic">
+  [ Register A: 5 ] + [ Register B: 10 ] ──▶ ( ALU ) ──▶ [ Register C: 15 ]
+            </div>
+            <div class="block aha-moment">
+                <strong>💡 Real-World "Aha!" Moment:</strong> Arithmetic executes in nanoseconds because numbers are loaded directly into internal CPU holding slots right at the ALU.
+            </div>
+            <div class="block metaphor">
+                <strong>🎨 Physical Metaphor:</strong> The Chef's own two hands holding ingredients.
+            </div>
+            <div class="block syllabus-concept">
+                <strong>🧠 Syllabus Concept:</strong> Smallest, ultra-fast storage locations inside the CPU core for immediate operands.
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <span>🚌 6. System Buses & Interrupts <span class="tag">I/O Interfacing</span></span>
+            <span class="icon">▼</span>
+        </div>
+        <div class="card-body">
+            <div class="ascii-graphic">
+  [ Keypress 'A' ] ──▶ Interrupt Line ──▶ ( CPU Stops ) ──▶ Read Data Bus
+            </div>
+            <div class="block aha-moment">
+                <strong>💡 Real-World "Aha!" Moment:</strong> Pressing a key halts video playback for a microsecond because a physical signal alerts the CPU to read the bus data immediately.
+            </div>
+            <div class="block metaphor">
+                <strong>🎨 Physical Metaphor:</strong> Service desk bell forcing the worker to pause and take the ticket.
+            </div>
+            <div class="block syllabus-concept">
+                <strong>🧠 Syllabus Concept:</strong> Buses (Address, Data, Control) carry signals; interrupts signal hardware attention.
             </div>
         </div>
     </div>
 
     <!-- SECTION 2 -->
-    <div class="section-title">2. System Software & Execution</div>
+    <div class="section-title">2. System Software & Compilation</div>
 
     <div class="card">
         <div class="card-header" onclick="toggleCard(this)">
-            <span>🛠️ 4. Compiler vs. Linker Errors <span class="tag">Software</span></span>
+            <span>🛠️ 7. Compiler, Assembler & Linker <span class="tag">Software</span></span>
             <span class="icon">▼</span>
         </div>
         <div class="card-body">
             <div class="ascii-graphic">
-  [ C Code ] ──▶ ( COMPILER ) ──▶ [ Object File ] ──▶ ( LINKER ) ──▶ [ .EXE File ]
-                   Reads Syntax                        Glues Libraries
+  [ C Code ] ──( Compiler )──▶ [ Assembly ] ──( Assembler )──▶ [ Object ] ──( Linker )──▶ [ .EXE ]
             </div>
             <div class="block aha-moment">
-                <strong>💡 Real-World "Aha!" Moment:</strong> Why does your C program show a list of syntax errors before the window even opens? The compiler reads your entire script like a book reviewer first. If there's a missing semicolon on line 50, it halts the whole translation immediately!
+                <strong>💡 Real-World "Aha!" Moment:</strong> "Missing .dll" errors mean the Linker couldn't find external pre-compiled library files needed to assemble the final executable.
+            </div>
+            <div class="block metaphor">
+                <strong>🎨 Physical Metaphor:</strong> Compiler = Translator; Assembler = Morse coder; Linker = Book Binder gluing chapters together.
             </div>
             <div class="block syllabus-concept">
-                <strong>🧠 Syllabus Concept (Compiler vs. Linker):</strong> A Compiler translates high-level code to machine object code. A Linker glues compiled object files together with system libraries to produce a executable file (.exe).
-            </div>
-            <div class="block discussion">
-                <strong>💬 Quick Check:</strong> "If you get an 'Undefined reference to printf' error, did the Compiler fail or the Linker?"
+                <strong>🧠 Syllabus Concept:</strong> Compiler translates high-level to assembly; Assembler converts to binary; Linker binds dependencies.
             </div>
         </div>
     </div>
 
     <div class="card">
         <div class="card-header" onclick="toggleCard(this)">
-            <span>📱 5. Operating System (OS) <span class="tag">System Software</span></span>
+            <span>📱 8. Operating System (OS) Functions <span class="tag">OS</span></span>
             <span class="icon">▼</span>
         </div>
         <div class="card-body">
-            <div class="ascii-graphic">
-  [ Your App ] ──▶ [ OPERATING SYSTEM ] ──▶ [ Speaker / Screen / RAM ]
-                     (Universal Director)
-            </div>
             <div class="block aha-moment">
-                <strong>💡 Real-World "Aha!" Moment:</strong> Why don't app developers have to write custom code for every single screen brand or speaker model in the market? The OS acts as the universal middleman, managing hardware access so apps don't have to deal with raw electronics!
+                <strong>💡 Real-World "Aha!" Moment:</strong> Apps don't need custom code for every screen or speaker model because the OS provides standardized hardware drivers.
+            </div>
+            <div class="block metaphor">
+                <strong>🎨 Physical Metaphor:</strong> Hotel General Manager assigning rooms, managing security, and routing guest requests.
             </div>
             <div class="block syllabus-concept">
-                <strong>🧠 Syllabus Concept (OS):</strong> System software that manages computer hardware, system resources (CPU scheduling, RAM allocation), and provides common services for software execution.
+                <strong>🧠 Syllabus Concept:</strong> Resource management (CPU scheduling, RAM allocation) and hardware abstraction layer.
             </div>
         </div>
     </div>
 
     <!-- SECTION 3 -->
-    <div class="section-title">3. Logic & Data Representation</div>
+    <div class="section-title">3. Communication, Security & Data Representation</div>
 
     <div class="card">
         <div class="card-header" onclick="toggleCard(this)">
-            <span>🔢 6. Integer Overflow & Data Types <span class="tag">Data Types</span></span>
+            <span>🔒 9. Security & Network Protocols <span class="tag">Networking</span></span>
+            <span class="icon">▼</span>
+        </div>
+        <div class="card-body">
+            <div class="block aha-moment">
+                <strong>💡 Real-World "Aha!" Moment:</strong> Account lockouts after 3 wrong passwords prevent brute-force automated scripts from running millions of guesses.
+            </div>
+            <div class="block metaphor">
+                <strong>🎨 Physical Metaphor:</strong> Security guard at a vault door enforcing a cooling-off timer.
+            </div>
+            <div class="block syllabus-concept">
+                <strong>🧠 Syllabus Concept:</strong> Rate-limiting, authentication controls, and error detection via checksums/parity.
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <span>🔢 10. Integers, Floating Point & ASCII <span class="tag">Data Types</span></span>
             <span class="icon">▼</span>
         </div>
         <div class="card-body">
             <div class="ascii-graphic">
-  Max Integer Value: [ 2,147,483,647 ] + 1 ──▶ [ -2,147,483,648 ] 💥 OVERFLOW!
+  ASCII Mapping : Binary 01000001 = Number 65 = Character 'A'
+  Floating Point: 0.1 + 0.2 = 0.30000000000000004 (Base-2 Rounding)
             </div>
             <div class="block aha-moment">
-                <strong>💡 Real-World "Aha!" Moment:</strong> Why can't you store 12.5 in an integer variable or count past 2,147,483,647 in older 32-bit games? An integer container has zero binary slots allocated for decimal points, and exceeding fixed bit capacity causes "overflow" into negative numbers!
+                <strong>💡 Real-World "Aha!" Moment:</strong> Computers show 'A' when pressing key 65 because character encoding maps numbers to font images; decimals use binary floating-point exponent math.
+            </div>
+            <div class="block metaphor">
+                <strong>🎨 Physical Metaphor:</strong> ASCII is a Secret Decoder Ring wheel mapping numbers to letters.
             </div>
             <div class="block syllabus-concept">
-                <strong>🧠 Syllabus Concept (Data Representation):</strong> Integers are fixed-precision whole numbers stored in fixed binary bit formats (e.g., 32-bit). Floating-point numbers use mantissa/exponent encoding for decimals.
+                <strong>🧠 Syllabus Concept:</strong> Integer overflow, IEEE 754 floating-point format (sign, mantissa, exponent), and ASCII/Unicode encoding.
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="section-title">4. Logic & Problem Solving</div>
+
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <span>📐 11. Algorithms & Flowcharts <span class="tag">Problem Solving</span></span>
+            <span class="icon">▼</span>
+        </div>
+        <div class="card-body">
+            <div class="ascii-graphic">
+  [ Start ] ──▶ [ Input Data ] ──▶ < Decision? > ──Yes──▶ [ Process ] ──▶ [ End ]
+                                        │
+                                        └──No───▶ [ Alt Process ]
+            </div>
+            <div class="block aha-moment">
+                <strong>💡 Real-World "Aha!" Moment:</strong> Navigation apps find route choices in milliseconds because they run unambiguous graph algorithms (like Dijkstra's) step-by-step.
+            </div>
+            <div class="block metaphor">
+                <strong>🎨 Physical Metaphor:</strong> Flowchart = Step-by-step LEGO instruction manual with decision branches.
+            </div>
+            <div class="block syllabus-concept">
+                <strong>🧠 Syllabus Concept:</strong> Problem-solving methodology: Analysis → Algorithm → Flowchart → Coding → Testing.
             </div>
         </div>
     </div>
