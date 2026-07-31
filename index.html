@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PSUC Unit I: Reverse Engineering Portal ⚙️</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-cyan: #38bdf8;
+            --accent-green: #4ade80;
+            --accent-orange: #fb923c;
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --border-color: #334155;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: var(--accent-cyan);
+            margin: 0 0 10px 0;
+            font-size: 1.8rem;
+        }
+
+        p.subtitle {
+            color: var(--text-sub);
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 14px 20px;
+            margin-bottom: 25px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 1rem;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-box:focus {
+            border-color: var(--accent-cyan);
+        }
+
+        .section-title {
+            color: var(--accent-orange);
+            font-size: 1.2rem;
+            margin: 25px 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: transform 0.1s, border-color 0.2s;
+        }
+
+        .card:hover {
+            border-color: var(--accent-cyan);
+        }
+
+        .card-header {
+            padding: 18px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.05rem;
+            user-select: none;
+        }
+
+        .card-header .icon {
+            color: var(--accent-cyan);
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .card.open .icon {
+            transform: rotate(180deg);
+        }
+
+        .card-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            background: #0f172a80;
+            padding: 0 20px;
+            border-top: 1px solid transparent;
+        }
+
+        .card.open .card-body {
+            max-height: 1000px;
+            padding: 20px;
+            border-top-color: var(--border-color);
+        }
+
+        .block {
+            margin-bottom: 15px;
+            padding: 12px 15px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .aha-moment {
+            background: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid var(--accent-cyan);
+            color: #e0f2fe;
+        }
+
+        .syllabus-concept {
+            background: rgba(74, 222, 128, 0.1);
+            border-left: 4px solid var(--accent-green);
+            color: #dcfce7;
+        }
+
+        .discussion {
+            background: rgba(251, 146, 60, 0.1);
+            border-left: 4px solid var(--accent-orange);
+            color: #ffedd5;
+            font-style: italic;
+        }
+
+        .ascii-graphic {
+            font-family: 'Courier New', Courier, monospace;
+            background: #00000080;
+            color: var(--accent-green);
+            padding: 10px 15px;
+            border-radius: 6px;
+            white-space: pre;
+            font-size: 0.8rem;
+            line-height: 1.2;
+            overflow-x: auto;
+            margin: 10px 0;
+            border: 1px dashed var(--border-color);
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            background: #334155;
+            color: #cbd5e1;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>PSUC Unit I: Reverse Engineering Portal ⚙️</h1>
+        <p class="subtitle">Don't memorize definitions—see how modern computer architecture actually works!</p>
+    </header>
+
+    <input type="text" id="searchInput" class="search-box" placeholder="🔍 Type to search topics (e.g., RAM, CPU, Compiler, Cache)..." onkeyup="filterTopics()">
+
+    <!-- SECTION 1 -->
+    <div class="section-title">1. Hardware Systems & Memory Hierarchy</div>
+
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <span>🔥 1. CPU & Thermal Throttling <span class="tag">Hardware</span></span>
+            <span class="icon">▼</span>
+        </div>
+        <div class="card-body">
+            <div class="ascii-graphic">
+  [ 50 Chrome Tabs ] ──▶ ( CPU: 100% Load ) ──▶ ♨️ HEAT!
+                             │
+                             ▼
+                    [ 💨 Fans at 5000 RPM ]
+            </div>
+            <div class="block aha-moment">
+                <strong>💡 Real-World "Aha!" Moment:</strong> Ever wonder why your laptop fans turn into a jet engine when you open 50 Chrome tabs? Chrome opens dozens of separate processes, forcing the CPU to frantically context-switch and run millions of micro-calculations per second. High load = high heat!
+            </div>
+            <div class="block syllabus-concept">
+                <strong>🧠 Syllabus Concept (CPU):</strong> The Central Processing Unit fetches, decodes, and executes instructions. High activity increases clock cycle frequency and thermal power consumption.
+            </div>
+            <div class="block discussion">
+                <strong>💬 Quick Check:</strong> "If the CPU is getting hot, is it because it's fetching data from the SSD or processing instructions inside its registers?"
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <span>🔋 2. RAM vs. SSD (Why Unsaved Work Vanishes) <span class="tag">Memory</span></span>
+            <span class="icon">▼</span>
+        </div>
+        <div class="card-body">
+            <div class="ascii-graphic">
+  POWER ON  : [ RAM: Working Space ] ──SAVE──▶ [ SSD: Permanent ]
+  POWER OFF : [ RAM: Wiped Clean!  ]           [ SSD: Safe & Intact ]
+            </div>
+            <div class="block aha-moment">
+                <strong>💡 Real-World "Aha!" Moment:</strong> Why did your unsaved document vanish when your laptop battery died? You were typing inside RAM (volatile working space). It only stays permanent once transferred down to the SSD or Hard Drive (non-volatile cold storage).
+            </div>
+            <div class="block syllabus-concept">
+                <strong>🧠 Syllabus Concept (Primary vs. Secondary):</strong> RAM is fast and volatile (loses state on power loss). Secondary storage (SSD/HDD) is non-volatile and permanent, but slower to access.
+            </div>
+            <div class="block discussion">
+                <strong>💬 Quick Check:</strong> "When you launch a video game, where does the data load from, and where does it go while playing?"
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <span>⚡ 3. Cache & Memory Latency <span class="tag">Memory Hierarchy</span></span>
+            <span class="icon">▼</span>
+        </div>
+        <div class="card-body">
+            <div class="ascii-graphic">
+  [ CPU Core ] ⚡ Instant ⚡ [ CACHE ] ──🚶 Walk ──▶ [ RAM ]
+            </div>
+            <div class="block aha-moment">
+                <strong>💡 Real-World "Aha!" Moment:</strong> Why does a 200MB game load slowly the first time, but instantly when you reopen it 10 seconds later? The CPU cached the most frequently used graphics data right next to itself on the chip so it doesn't have to walk back to RAM!
+            </div>
+            <div class="block syllabus-concept">
+                <strong>🧠 Syllabus Concept (Cache):</strong> Cache is small, high-speed SRAM located on the CPU die. It buffers frequently accessed RAM instructions to drastically reduce CPU wait times.
+            </div>
+            <div class="block discussion">
+                <strong>💬 Quick Check:</strong> "Why can't computers just use 32GB of Cache memory instead of buying RAM?"
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="section-title">2. System Software & Execution</div>
+
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <span>🛠️ 4. Compiler vs. Linker Errors <span class="tag">Software</span></span>
+            <span class="icon">▼</span>
+        </div>
+        <div class="card-body">
+            <div class="ascii-graphic">
+  [ C Code ] ──▶ ( COMPILER ) ──▶ [ Object File ] ──▶ ( LINKER ) ──▶ [ .EXE File ]
+                   Reads Syntax                        Glues Libraries
+            </div>
+            <div class="block aha-moment">
+                <strong>💡 Real-World "Aha!" Moment:</strong> Why does your C program show a list of syntax errors before the window even opens? The compiler reads your entire script like a book reviewer first. If there's a missing semicolon on line 50, it halts the whole translation immediately!
+            </div>
+            <div class="block syllabus-concept">
+                <strong>🧠 Syllabus Concept (Compiler vs. Linker):</strong> A Compiler translates high-level code to machine object code. A Linker glues compiled object files together with system libraries to produce a executable file (.exe).
+            </div>
+            <div class="block discussion">
+                <strong>💬 Quick Check:</strong> "If you get an 'Undefined reference to printf' error, did the Compiler fail or the Linker?"
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <span>📱 5. Operating System (OS) <span class="tag">System Software</span></span>
+            <span class="icon">▼</span>
+        </div>
+        <div class="card-body">
+            <div class="ascii-graphic">
+  [ Your App ] ──▶ [ OPERATING SYSTEM ] ──▶ [ Speaker / Screen / RAM ]
+                     (Universal Director)
+            </div>
+            <div class="block aha-moment">
+                <strong>💡 Real-World "Aha!" Moment:</strong> Why don't app developers have to write custom code for every single screen brand or speaker model in the market? The OS acts as the universal middleman, managing hardware access so apps don't have to deal with raw electronics!
+            </div>
+            <div class="block syllabus-concept">
+                <strong>🧠 Syllabus Concept (OS):</strong> System software that manages computer hardware, system resources (CPU scheduling, RAM allocation), and provides common services for software execution.
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="section-title">3. Logic & Data Representation</div>
+
+    <div class="card">
+        <div class="card-header" onclick="toggleCard(this)">
+            <span>🔢 6. Integer Overflow & Data Types <span class="tag">Data Types</span></span>
+            <span class="icon">▼</span>
+        </div>
+        <div class="card-body">
+            <div class="ascii-graphic">
+  Max Integer Value: [ 2,147,483,647 ] + 1 ──▶ [ -2,147,483,648 ] 💥 OVERFLOW!
+            </div>
+            <div class="block aha-moment">
+                <strong>💡 Real-World "Aha!" Moment:</strong> Why can't you store 12.5 in an integer variable or count past 2,147,483,647 in older 32-bit games? An integer container has zero binary slots allocated for decimal points, and exceeding fixed bit capacity causes "overflow" into negative numbers!
+            </div>
+            <div class="block syllabus-concept">
+                <strong>🧠 Syllabus Concept (Data Representation):</strong> Integers are fixed-precision whole numbers stored in fixed binary bit formats (e.g., 32-bit). Floating-point numbers use mantissa/exponent encoding for decimals.
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function toggleCard(header) {
+        const card = header.parentElement;
+        card.classList.toggle('open');
+    }
+
+    function filterTopics() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const cards = document.querySelectorAll('.card');
+
+        cards.forEach(card => {
+            const text = card.innerText.toLowerCase();
+            if (text.includes(input)) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
