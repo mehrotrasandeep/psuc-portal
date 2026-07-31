@@ -34,7 +34,7 @@
 
         header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             padding: 20px;
             background: var(--card-bg);
             border-radius: 12px;
@@ -52,6 +52,38 @@
             color: var(--text-sub);
             margin: 0;
             font-size: 0.95rem;
+        }
+
+        .sketchnote-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .sketchnote-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .sketchnote-text {
+            color: var(--text-sub);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .sketchnote-text ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+
+        .sketchnote-text li {
+            margin-bottom: 8px;
         }
 
         .search-box {
@@ -189,6 +221,23 @@
         <p class="subtitle">Complete Unit I Syllabus • Real-World Scenarios • Physical Metaphors</p>
     </header>
 
+    <!-- SKETCHNOTE BANNER & NARRATION -->
+    <div class="sketchnote-container">
+        <div style="text-align: center;">
+            <img src="Gemini_Generated_Image_voltcdvoltcdvolt (1).png" alt="Inside Silicon City Sketchnote">
+        </div>
+        <div class="sketchnote-text">
+            <p style="color: var(--text-main); margin-top: 0;">This sketchnote narrative guides you through the inner workings of "Silicon City," breaking down complex computing concepts into three visual zones:</p>
+            <ul>
+                <li><strong style="color: var(--accent-cyan);">Zone 1: The Central Tower (Hardware)</strong> explores the physical infrastructure, using the metaphor of a high-speed kitchen to explain how the CPU, ALU, and various memory layers (Cache, RAM, SSD, ROM) work together.</li>
+                <li><strong style="color: var(--accent-green);">Zone 2: The Translation Factory (Software)</strong> illustrates the assembly line of code, from the raw English blueprint scroll through the compilation, assembly, and linking stages to create an executable program managed by the OS.</li>
+                <li><strong style="color: var(--accent-purple);">Zone 3: The Binary Vault & Logic Map</strong> breaks down how data is stored and logic is processed, covering integer limits, floating-point precision, character encoding, and algorithmic problem-solving trails.</li>
+            </ul>
+            <p style="margin-bottom: 0;">The <strong>"Bus Highway"</strong> acts as the main artery, connecting the hardware and software zones to ensure a smooth flow of data, addresses, and control signals.</p>
+        </div>
+    </div>
+
+    <!-- SEARCH BOX -->
     <input type="text" id="searchInput" class="search-box" placeholder="🔍 Search topics (e.g., RAM, ROM, Compiler, Float, Registers, Bus)..." onkeyup="filterTopics()">
 
     <!-- SECTION 1 -->
